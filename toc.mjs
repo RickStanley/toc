@@ -1,8 +1,8 @@
 export default class Toc {
-  _headingMap = new Map();
-  _headerHeight = 0;
-  _headingMarginBottom = 0;
-  _offsetScreen = 0;
+  #headingMap = new Map();
+  #headerHeight = 0;
+  #headingMarginBottom = 0;
+  #offsetScreen = 0;
   constructor({ tocSelector = '#toc', header, hgroup = 'h2', sectionSelector = 'article', offsetScreen = 0 }) {
     const hSelection = `${sectionSelector} ${hgroup}`,
       toc = document.querySelector(tocSelector);
@@ -29,28 +29,28 @@ export default class Toc {
     this.testScroll();
   }
   get headingMap() {
-    return this._headingMap;
+    return this.#headingMap;
   }
   set headingMap(value) {
-    this._headingMap = value;
+    this.#headingMap = value;
   }
   get headerHeight() {
-    return this._headerHeight;
+    return this.#headerHeight;
   }
   set headerHeight(value) {
-    this._headerHeight = value;
+    this.#headerHeight = value;
   }
   get headingMarginBottom() {
-    return this._headingMarginBottom;
+    return this.#headingMarginBottom;
   }
   set headingMarginBottom(value) {
-    this._headingMarginBottom = value;
+    this.#headingMarginBottom = value;
   }
   get offsetScreen() {
-    return this._offsetScreen;
+    return this.#offsetScreen;
   }
   set offsetScreen(value) {
-    this._offsetScreen = value;
+    this.#offsetScreen = value;
   }
   testScroll() {
     const scrollTop = window.pageYOffset;

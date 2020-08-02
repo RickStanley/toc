@@ -3,7 +3,7 @@ export default class Toc {
   #headerHeight = 0;
   #headingMarginBottom = 0;
   #offsetScreen = 0;
-  constructor({ tocSelector = '#toc', header, hgroup = 'h2', sectionSelector = 'article', offsetScreen = 0 }) {
+  constructor({ tocSelector = '#toc', header, hgroup = 'h2', sectionSelector = 'article', offsetScreen = 0 } = {}) {
     const hSelection = `${sectionSelector} ${hgroup}`,
       toc = document.querySelector(tocSelector);
     if (!toc) throw new Error(`No matching element with selector: ${tocSelector}`);

@@ -3,7 +3,7 @@ export default class Toc {
   #headerHeight = 0;
   #headingMarginBottom = 0;
   #offsetScreen = 0;
-  #bottomOffset = 60;
+  #bottomOffset = 80;
 
   constructor({ tocSelector = '#toc', header, hgroup = 'h2', sectionSelector = 'article', offsetScreen = 0, bottomOffset } = {}) {
     const hSelection = `${sectionSelector} ${hgroup}`,

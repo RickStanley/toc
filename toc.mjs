@@ -3,7 +3,9 @@ export default class Toc {
   #headerHeight = 0;
   #headingMarginBottom = 0;
   #offsetScreen = 0;
-  constructor({ tocSelector = '#toc', header, hgroup = 'h2', sectionSelector = 'article', offsetScreen = 0 } = {}) {
+  #bottomOffset = 60;
+
+  constructor({ tocSelector = '#toc', header, hgroup = 'h2', sectionSelector = 'article', offsetScreen = 0, bottomOffset } = {}) {
     const hSelection = `${sectionSelector} ${hgroup}`,
       toc = document.querySelector(tocSelector);
     if (!toc) throw new Error(`No matching element with selector: ${tocSelector}`);
@@ -21,6 +23,8 @@ export default class Toc {
 
     this.headingMarginBottom = parseInt(getComputedStyle(document.querySelector(hSelection)).marginBottom);
     this.offsetScreen = offsetScreen;
+
+    if (bottomOffset) this.#bottomOffset = bottomOffset;
 
     window.addEventListener('scroll', this.testScroll.bind(this), {
       passive: true
@@ -56,7 +60,7 @@ export default class Toc {
     const scrollTop = window.pageYOffset;
     const screenBottom = scrollTop + window.innerHeight;
     const screenUsableBottom = screenBottom;
-    const screenUsableTop = scrollTop + this.headerHeight + this.headingMarginBottom;
+    const screenUsableTop = scrollTop + this.headerHeight + this.headingMarginBottom + this.#bottomOffset;
     let lastVisible;
     for (const [h, a] of this.headingMap) {
       const hTop = h.getBoundingClientRect().top + window.pageYOffset;
@@ -64,7 +68,7 @@ export default class Toc {
       if (hTop < screenUsableTop) {
         lastVisible = a;
       }
-      if (hTop > screenUsableTop && hBottom + this.headingMarginBottom < screenUsableBottom) {
+      if (hTop > screenUsableTop && hBottom + this.headingMarginBottom < screenUsableBottom - this.#bottomOffset) {
         a.classList.add('current');
       } else {
         a.classList.remove('current');
